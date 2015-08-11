@@ -1,3 +1,4 @@
 #!/usr/bin/dh-exec
 
-libbcc/bcinfo/*.so.*   usr/lib/${DEB_HOST_MULTIARCH}
+libbcc/bcinfo/*.so.* usr/lib/${DEB_HOST_MULTIARCH}
+libbcc/bcinfo/*.so   usr/share/android-sdk/built-tools/${BUILD_TOOLS_VERSION}
