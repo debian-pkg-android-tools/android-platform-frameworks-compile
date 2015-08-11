@@ -1,0 +1,25 @@
+#!/usr/bin/make -f
+
+export UPSTREAM_LIBVERSION = 5.1.1.8
+export LLVM_VERSION = 3.5
+
+%:
+	dh $@
+
+override_dh_shlibdeps:
+	dh_shlibdeps -l/usr/lib/android
+
+override_dh_auto_build:
+	make -C libbcc/bcinfo/Wrap -f ../../../debian/libLLVMWrap.mk
+	make -C libbcc/bcinfo/BitReader_2_7 -f ../../../debian/libLLVMBitReader_2_7.mk
+	make -C libbcc/bcinfo/BitReader_3_0 -f ../../../debian/libLLVMBitReader_3_0.mk
+	make -C slang/BitWriter_3_2 -f ../../debian/libLLVMBitWriter_3_2.mk
+	make -C libbcc/bcinfo -f ../../debian/libbcinfo.mk
+
+override_dh_auto_clean:
+	make -C libbcc/bcinfo/Wrap -f ../../../debian/libLLVMWrap.mk clean
+	make -C libbcc/bcinfo/BitReader_2_7 -f ../../../debian/libLLVMBitReader_2_7.mk clean
+	make -C libbcc/bcinfo/BitReader_3_0 -f ../../../debian/libLLVMBitReader_3_0.mk clean
+	make -C slang/BitWriter_3_2 -f ../../debian/libLLVMBitWriter_3_2.mk clean
+	make -C libbcc/bcinfo -f ../../debian/libbcinfo.mk clean
+	dh_auto_clean
