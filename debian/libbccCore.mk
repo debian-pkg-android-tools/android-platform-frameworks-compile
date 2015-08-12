@@ -2,14 +2,14 @@ include /usr/include/android/arch/android_includes.mk
 include ../../../slang/rs_version.mk
 include ../../../debian/use_llvm.mk
 
-NAME = libLLVMWrap
-SOURCES = bitcode_wrapperer.cpp \
-          file_wrapper_input.cpp \
-          file_wrapper_output.cpp \
-          in_memory_wrapper_input.cpp \
-          wrapper_output.cpp
+NAME = libbccCore
+SOURCES = BCCContext.cpp \
+          BCCContextImpl.cpp \
+          Compiler.cpp \
+          Script.cpp \
+          Source.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
-CXXFLAGS += -fPIC -c $(RS_VERSION_DEFINE) -D__HOST__
+CXXFLAGS += -fPIC -c $(RS_VERSION_DEFINE) -D__HOST__ -D__DISABLE_ASSERTS
 CPPFLAGS += $(ANDROID_INCLUDES) -I/usr/include/android -I../../include
 
 build: $(OBJECTS)

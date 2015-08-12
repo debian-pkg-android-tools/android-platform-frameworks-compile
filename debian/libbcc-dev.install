@@ -1,3 +1,7 @@
 #!/usr/bin/dh-exec
 
-libbcc/bcinfo/*.so   usr/lib/${DEB_HOST_MULTIARCH}
+libbcc/include/*    usr/include
+libbcc/bcinfo/*.so  usr/lib/${DEB_HOST_MULTIARCH}
+libbcc/bcinfo/*.a   usr/lib/${DEB_HOST_MULTIARCH}
+libbcc/bcinfo/*/*.a usr/lib/${DEB_HOST_MULTIARCH}
+libbcc/lib/*/*.so   usr/lib/${DEB_HOST_MULTIARCH}

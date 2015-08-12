@@ -5,6 +5,7 @@ Maintainer: Android tools Maintainer <android-tools-devel@lists.alioth.debian.or
 Uploaders: Kai-Chung Yan <seamlikok@gmail.com>
 Build-Depends: android-libcutils-dev,
                android-liblog-dev,
+               android-libutils-dev,
                debhelper (>=9),
                dh-exec,
                libc++-dev,
@@ -18,7 +19,9 @@ Package: libbcc5
 Architecture: amd64 i386 arm arm64 armeb mips mipsel mips64 mips64el
 Depends: android-libcutils,
          android-liblog,
-         ${shlibs:Depends}, ${misc:Depends}
+         android-libutils,
+         ${shlibs:Depends},
+         ${misc:Depends}
 Description: Versatile Bitcode Execution Engine for Mobile Devices
  libbcc is an LLVM bitcode execution engine that compiles the bitcode to an
  in-memory executable. libbcc provides:

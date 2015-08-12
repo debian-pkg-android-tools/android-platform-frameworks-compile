@@ -1,6 +1,6 @@
 include /usr/include/android/arch/android_includes.mk
 include ../../../slang/rs_version.mk
-include ../../../debian/use_libcxx.mk
+include ../../../debian/use_llvm.mk
 
 NAME = libLLVMBitReader_3_0
 SOURCES = BitcodeReader.cpp

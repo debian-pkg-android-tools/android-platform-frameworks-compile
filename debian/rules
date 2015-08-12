@@ -17,6 +17,11 @@ override_dh_auto_build:
 	make -C libbcc/bcinfo/BitReader_3_0 -f ../../../debian/libLLVMBitReader_3_0.mk
 	make -C slang/BitWriter_3_2 -f ../../debian/libLLVMBitWriter_3_2.mk
 	make -C libbcc/bcinfo -f ../../debian/libbcinfo.mk
+	make -C libbcc/lib/Core -f ../../../debian/libbccCore.mk
+	make -C libbcc/lib/ExecutionEngine -f ../../../debian/libbccExecutionEngine.mk
+	make -C libbcc/lib/Renderscript -f ../../../debian/libbccRenderscript.mk
+	make -C libbcc/lib/Support -f ../../../debian/libbccSupport.mk
+	make -C libbcc -f ../debian/libbcc.mk
 
 override_dh_auto_clean:
 	make -C libbcc/bcinfo/Wrap -f ../../../debian/libLLVMWrap.mk clean
@@ -24,4 +29,9 @@ override_dh_auto_clean:
 	make -C libbcc/bcinfo/BitReader_3_0 -f ../../../debian/libLLVMBitReader_3_0.mk clean
 	make -C slang/BitWriter_3_2 -f ../../debian/libLLVMBitWriter_3_2.mk clean
 	make -C libbcc/bcinfo -f ../../debian/libbcinfo.mk clean
+	make -C libbcc/lib/Core -f ../../../debian/libbccCore.mk clean
+	make -C libbcc/lib/ExecutionEngine -f ../../../debian/libbccExecutionEngine.mk clean
+	make -C libbcc/lib/Renderscript -f ../../../debian/libbccRenderscript.mk clean
+	make -C libbcc/lib/Support -f ../../../debian/libbccSupport.mk clean
+	make -C libbcc -f ../debian/libbcc.mk clean
 	dh_auto_clean
