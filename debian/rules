@@ -1,6 +1,8 @@
 #!/usr/bin/make -f
 
 export UPSTREAM_LIBVERSION = 5.1.1.8
+UPSTREAM_TAG = android-5.1.1_r8
+UPSTREAM_VERSION = 5.1.1+r8
 export LLVM_VERSION = 3.5
 # See sdk/build_tools_source.prop_template in platform/development
 export BUILD_TOOLS_VERSION = 22.1.3
@@ -35,3 +37,23 @@ override_dh_auto_clean:
 	make -C libbcc/lib/Support -f ../../../debian/libbccSupport.mk clean
 	make -C libbcc -f ../debian/libbcc.mk clean
 	dh_auto_clean
+
+get-orig-source: libbcc.tar.gz slang.tar.gz linkloader.tar.gz
+	mkdir -p android-platform-frameworks-compile-$(UPSTREAM_VERSION)/libbcc
+	mkdir android-platform-frameworks-compile-$(UPSTREAM_VERSION)/slang
+	mkdir android-platform-frameworks-compile-$(UPSTREAM_VERSION)/linkloader
+	tar -f libbcc.tar.gz -z -x --directory android-platform-frameworks-compile-$(UPSTREAM_VERSION)/libbcc
+	tar -f slang.tar.gz -z -x --directory android-platform-frameworks-compile-$(UPSTREAM_VERSION)/slang
+	tar -f linkloader.tar.gz -z -x --directory android-platform-frameworks-compile-$(UPSTREAM_VERSION)/linkloader
+	tar --create --xz -f android-platform-frameworks-compile_$(UPSTREAM_VERSION).orig.tar.xz android-platform-frameworks-compile-$(UPSTREAM_VERSION)
+	mv android-platform-frameworks-compile_$(UPSTREAM_VERSION).orig.tar.xz ..
+	rm -r -f $^ android-platform-frameworks-compile-$(UPSTREAM_VERSION)
+
+libbcc.tar.gz:
+	wget https://android.googlesource.com/platform/frameworks/compile/libbcc/+archive/$(UPSTREAM_TAG).tar.gz -O $@
+
+slang.tar.gz:
+	wget https://android.googlesource.com/platform/frameworks/compile/slang/+archive/$(UPSTREAM_TAG).tar.gz -O $@
+
+linkloader.tar.gz:
+	wget https://android.googlesource.com/platform/frameworks/compile/linkloader/+archive/android-4.2.2_r1.tar.gz -O $@
