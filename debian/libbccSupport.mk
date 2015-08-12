@@ -13,7 +13,7 @@ SOURCES = CompilerConfig.cpp \
 OBJECTS = $(SOURCES:.cpp=.o)
 CFLAGS += -fPIC -c
 CXXFLAGS += -fPIC -c $(RS_VERSION_DEFINE) -D__HOST__ -D__DISABLE_ASSERTS
-CPPFLAGS += $(ANDROID_INCLUDES) -I/usr/include/android -I../../include
+CPPFLAGS += $(ANDROID_INCLUDES) -I/usr/include/android -I../../include -I.
 
 build: $(OBJECTS) sha1.o
 	ar rs $(NAME).a $^
