@@ -11,7 +11,8 @@ SOURCES = ELFObjectLoaderImpl.cpp \
           SymbolResolvers.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 CXXFLAGS += -fPIC -c $(RS_VERSION_DEFINE) -D__HOST__ -D__DISABLE_ASSERTS
-CPPFLAGS += $(ANDROID_INCLUDES) -I/usr/include/android -I../../include
+CPPFLAGS += $(ANDROID_INCLUDES) -I/usr/include/android \
+            -I../../include -I../../../linkloader -I../../../linkloader/include
 
 build: $(OBJECTS)
 	ar rs $(NAME).a $^
