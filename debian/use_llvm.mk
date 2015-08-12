@@ -1,6 +1,6 @@
 # Use libc++
-CXXFLAGS += -D_USING_LIBCXX
-CPPFLAGS += -I/usr/include/c++/v1 -nostdinc++ -std=c++11
+CXXFLAGS += -D_USING_LIBCXX -nostdinc++ -std=c++11
+CPPFLAGS += -I/usr/include/c++/v1
 LDFLAGS += -nodefaultlibs -lm -lc -lc++
 
 # Use llvm
