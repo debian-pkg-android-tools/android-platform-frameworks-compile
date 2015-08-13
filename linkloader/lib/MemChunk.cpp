@@ -21,7 +21,11 @@
 
 #include <llvm/Support/raw_ostream.h>
 
+#ifndef USE_MINGW       /* TODO create a proper HAVE_MMAN_H */
 #include <sys/mman.h>
+#else
+#include "mmanWindows.h"
+#endif
 
 #include <stdlib.h>
 
@@ -37,29 +41,49 @@
 static uintptr_t StartAddr = 0x7e000000UL;
 #endif
 
-MemChunk::MemChunk() : buf((unsigned char *)MAP_FAILED), buf_size(0) {
+AllocFunc MemChunk::VendorAlloc = NULL;
+FreeFunc MemChunk::VendorFree = NULL;
+
+MemChunk::MemChunk() : buf(NULL), buf_size(0), bVendorBuf(true) {
 }
 
 MemChunk::~MemChunk() {
-  if (buf != MAP_FAILED) {
+  if (!invalidBuf() && bVendorBuf && VendorFree) {
+    (*VendorFree)(buf);
+    return;
+  }
+  if (!invalidBuf()) {
     munmap(buf, buf_size);
   }
 }
 
-bool MemChunk::allocate(size_t size) {
-#if USE_FIXED_ADDR_MEM_CHUNK
-  buf = (unsigned char *)mmap((void *)StartAddr, size,
-                              PROT_READ | PROT_WRITE,
-                              MAP_PRIVATE | MAP_ANON | MAP_32BIT,
-                              -1, 0);
-#else
-  buf = (unsigned char *)mmap(0, size,
-                              PROT_READ | PROT_WRITE,
-                              MAP_PRIVATE | MAP_ANON | MAP_32BIT,
-                              -1, 0);
-#endif
+bool MemChunk::invalidBuf() const {
+  return (buf == 0 || buf == (unsigned char *)MAP_FAILED);
+}
 
-  if (buf == MAP_FAILED) {
+bool MemChunk::allocate(size_t size) {
+  if (size == 0) {
+    return true;
+  }
+  if (VendorAlloc) {
+    buf = (unsigned char*)(*VendorAlloc)(size, 0);
+  }
+  if (invalidBuf()) {
+    bVendorBuf = false;
+#if USE_FIXED_ADDR_MEM_CHUNK
+    buf = (unsigned char *)mmap((void *)StartAddr, size,
+                                PROT_READ | PROT_WRITE,
+                                MAP_PRIVATE | MAP_ANON | MAP_32BIT,
+                                -1, 0);
+#else
+    buf = (unsigned char *)mmap(0, size,
+                                PROT_READ | PROT_WRITE,
+                                MAP_PRIVATE | MAP_ANON | MAP_32BIT,
+                                -1, 0);
+#endif
+  }
+
+  if (invalidBuf()) {
     return false;
   }
 
@@ -72,7 +96,7 @@ bool MemChunk::allocate(size_t size) {
 }
 
 void MemChunk::print() const {
-  if (buf != MAP_FAILED) {
+  if (!invalidBuf()) {
     dump_hex(buf, buf_size, 0, buf_size);
   }
 }

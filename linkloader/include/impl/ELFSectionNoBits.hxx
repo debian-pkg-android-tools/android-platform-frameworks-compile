@@ -24,13 +24,11 @@
 #include <llvm/Support/Format.h>
 #include <llvm/Support/raw_ostream.h>
 
-#include <sys/mman.h>
-
 template <unsigned Bitwidth>
 template <typename Archiver>
 inline ELFSectionNoBits<Bitwidth> *
 ELFSectionNoBits<Bitwidth>::read(Archiver &AR, ELFSectionHeaderTy const *sh) {
-  llvm::OwningPtr<ELFSectionNoBits> result(new ELFSectionNoBits());
+  std::unique_ptr<ELFSectionNoBits> result(new ELFSectionNoBits());
 
   if (!result->chunk.allocate(sh->getSize())) {
     return NULL;
@@ -38,7 +36,7 @@ ELFSectionNoBits<Bitwidth>::read(Archiver &AR, ELFSectionHeaderTy const *sh) {
 
   result->sh = sh;
 
-  return result.take();
+  return result.release();
 }
 
 #endif // ELF_SECTION_NOBITS_HXX
