@@ -24,6 +24,9 @@ override_dh_auto_build:
 	make -C libbcc/lib/Renderscript -f ../../../debian/libbccRenderscript.mk
 	make -C libbcc/lib/Support -f ../../../debian/libbccSupport.mk
 	make -C libbcc -f ../debian/libbcc.mk
+	make -C libbcc/tools/bcc -f ../../../debian/bcc.mk
+	make -C libbcc/tools/bcc_compat -f ../../../debian/bcc_compat.mk
+	make -C libbcc/tools/bcc_strip_attr -f ../../../debian/bcc_strip_attr.mk
 
 override_dh_auto_clean:
 	make -C libbcc/bcinfo/Wrap -f ../../../debian/libLLVMWrap.mk clean
@@ -36,6 +39,9 @@ override_dh_auto_clean:
 	make -C libbcc/lib/Renderscript -f ../../../debian/libbccRenderscript.mk clean
 	make -C libbcc/lib/Support -f ../../../debian/libbccSupport.mk clean
 	make -C libbcc -f ../debian/libbcc.mk clean
+	make -C libbcc/tools/bcc -f ../../../debian/bcc.mk clean
+	make -C libbcc/tools/bcc_compat -f ../../../debian/bcc_compat.mk clean
+	make -C libbcc/tools/bcc_strip_attr -f ../../../debian/bcc_strip_attr.mk clean
 	dh_auto_clean
 
 get-orig-source: libbcc.tar.gz slang.tar.gz linkloader.tar.gz

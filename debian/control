@@ -1,5 +1,5 @@
 Source: android-platform-frameworks-compile
-Section: libs
+Section: devel
 Priority: optional
 Maintainer: Android tools Maintainer <android-tools-devel@lists.alioth.debian.org>
 Uploaders: Kai-Chung Yan <seamlikok@gmail.com>
@@ -8,7 +8,7 @@ Build-Depends: android-libcutils-dev,
                android-libutils-dev,
                debhelper (>=9),
                dh-exec,
-               libc++-dev,
+               libc++-dev (>= 3.6.2),
                llvm-3.5-dev
 Standards-Version: 3.9.6
 Homepage: https://android.googlesource.com
@@ -16,12 +16,15 @@ Vcs-Git: http://anonscm.debian.org/android-tools/android-platform-frameworks-com
 Vcs-Browser: http://anonscm.debian.org/cgit/android-tools/android-platform-frameworks-compile.git
 
 Package: libbcc5
+Section: libs
 Architecture: amd64 i386 arm arm64 armeb mips mipsel mips64 mips64el
 Depends: android-libcutils,
          android-liblog,
          android-libutils,
          ${shlibs:Depends},
          ${misc:Depends}
+Breaks: bcc
+Replaces: bcc
 Description: Versatile Bitcode Execution Engine for Mobile Devices
  libbcc is an LLVM bitcode execution engine that compiles the bitcode to an
  in-memory executable. libbcc provides:
@@ -47,3 +50,21 @@ Description: Versatile Bitcode Execution Engine for Mobile Devices - Devel files
    - Load from the cache file upon cache-hit.
  .
  This package contains the development files.
+
+Package: libbcc-tools
+Architecture: amd64 i386 arm arm64 armeb mips mipsel mips64 mips64el
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Versatile Bitcode Execution Engine for Mobile Devices - Tools
+ libbcc is an LLVM bitcode execution engine that compiles the bitcode to an
+ in-memory executable. libbcc provides:
+ * A just-in-time bitcode compiler, which translates the LLVM bitcode into
+   machine code.
+ * A caching mechanism, which can:
+   - After each compilation, serialize the in-memory executable into a cache
+     file. Note that the compilation is triggered by a cache miss.
+   - Load from the cache file upon cache-hit.
+ .
+ This package contains the following tools:
+ * bcc
+ * bcc_compat
+ * bcc_strip_attr

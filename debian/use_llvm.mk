@@ -6,6 +6,7 @@ LDFLAGS += -nodefaultlibs -lm -lc -lc++
 # Use llvm
 CXXFLAGS += -D_GNU_SOURCE \
             -D__STDC_LIMIT_MACROS \
+            -D__STDC_CONSTANT_MACROS \
             -fomit-frame-pointer \
             -Dsprintf=sprintf
 CPPFLAGS += -I/usr/include/llvm-$(LLVM_VERSION) -I/usr/include/llvm-c-$(LLVM_VERSION)

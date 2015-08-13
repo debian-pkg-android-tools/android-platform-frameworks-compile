@@ -1,0 +1,3 @@
+libbcc/tools/bcc/bcc            usr/bin
+libbcc/tools/bcc/bcc_compat     usr/bin
+libbcc/tools/bcc/bcc_strip_attr usr/bin

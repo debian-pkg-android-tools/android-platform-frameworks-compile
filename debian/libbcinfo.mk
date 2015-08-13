@@ -10,14 +10,13 @@ OBJECTS = $(SOURCES:.cpp=.o)
 CXXFLAGS += -fPIC -c $(RS_VERSION_DEFINE)
 CPPFLAGS += $(ANDROID_INCLUDES) -I/usr/include/android -I../include -I../../slang
 LDFLAGS += -fPIC -shared -Wl,-rpath=/usr/lib/android -Wl,-soname,$(NAME).so.5 \
-           -L/usr/lib/android -lcutils -llog \
-           -ldl -lpthread
+           -L/usr/lib/android -lcutils -llog -ldl -lpthread
 
 build: $(OBJECTS) Wrap/libLLVMWrap.a BitReader_2_7/libLLVMBitReader_2_7.a BitReader_3_0/libLLVMBitReader_3_0.a ../../slang/BitWriter_3_2/libLLVMBitWriter_3_2.a
 	c++ $^ -o $(NAME).so.$(UPSTREAM_LIBVERSION) $(LDFLAGS)
 	ar rs $(NAME).a $(OBJECTS)
-	ln -s $(NAME).so.$(UPSTREAM_LIBVERSION) $(NAME).so
-	ln -s $(NAME).so.$(UPSTREAM_LIBVERSION) $(NAME).so.5
+	ln -s -f $(NAME).so.$(UPSTREAM_LIBVERSION) $(NAME).so
+	ln -s -f $(NAME).so.$(UPSTREAM_LIBVERSION) $(NAME).so.5
 
 clean:
 	rm -f *.so* *.a *.o
