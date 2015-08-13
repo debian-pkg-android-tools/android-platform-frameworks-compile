@@ -1,5 +1,5 @@
 /*
- * Copyright 2011, The Android Open Source Project
+ * Copyright 2013, The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,24 +14,20 @@
  * limitations under the License.
  */
 
-#include<stdio.h>
+#ifdef USE_MINGW
 
-static char const *const test_str[] = {
-  "string 1",
-  "string 2",
-  "string 3",
-  "long long long long long long string"
-};
+#include "mmanWindows.h"
 
-static size_t test_str_count = sizeof(test_str) / sizeof(char const *const);
-
-int main(){
-  int i;
-  printf("test_str: %p\n", &test_str);
-  for (i = 0; i < test_str_count; ++i) {
-    printf("%p\n", test_str[i]);
-    printf("%s\n", test_str[i]);
-  }
-
-  return 0;
+void* mmap(void *, size_t, int, int, int, off_t) {
+  return MAP_FAILED;
 }
+
+int munmap(void *, size_t) {
+  return -1;
+}
+
+int mprotect(const void *, size_t, int) {
+  return -1;
+}
+
+#endif  // USE_MINGW
