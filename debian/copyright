@@ -2,7 +2,7 @@ Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0
 Upstream-Contact: https://source.android.com/compatibility/contact-us.html
 Source: https://android.googlesource.com/platform/frameworks/compile/libbcc
         https://android.googlesource.com/platform/frameworks/compile/slang
-        https://android.googlesource.com/platform/frameworks/compile/linkloader
+        https://android.googlesource.com/platform/frameworks/rs
 
 Files: *
 Copyright: 2005-2014 The Android Open Source Project

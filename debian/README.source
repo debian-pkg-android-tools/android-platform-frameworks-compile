@@ -34,11 +34,15 @@ The source code has been excerpted form the git repository:
 
 * https://android.googlesource.com/platform/frameworks/compile/libbcc
 * https://android.googlesource.com/platform/frameworks/compile/slang
-* https://android.googlesource.com/platform/frameworks/compile/linkloader
+* https://android.googlesource.com/platform/frameworks/rs
 
 We make these repositories into one single source package only to resolve
-circular dependencies. Note that linkloader has not been updated since Android
-4.2.2, so we only fetch android-4.2.2_r1 of linkloader.
+circular dependencies. Note that from platform/frameworks/rs we only take
+cpu_ref/linkloader, which is required by libbcc, and place it in the top
+directory of this package. Judging by that
+platform/frameworks/compile/linkloader has not been updated since Android 4.2.2,
+and from libbcc.mk in the top directory, it can be concluded that linkloader has
+been moved to platform/frameworks/rs, although we do not know the exact reason.
 
  -- Hans-Christoph Steiner <hans@eds.org>  Thu, 18 Sep 2014 16:37:50 -0400
- -- Kai-Chung Yan <seamlikok@gmail.com>  Wed, 12 Aug 2015 14:41:19 +0800
+ -- Kai-Chung Yan <seamlikok@gmail.com>  Thu, 13 Aug 2015

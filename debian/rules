@@ -44,16 +44,18 @@ override_dh_auto_clean:
 	make -C libbcc/tools/bcc_strip_attr -f ../../../debian/bcc_strip_attr.mk clean
 	dh_auto_clean
 
-get-orig-source: libbcc.tar.gz slang.tar.gz linkloader.tar.gz
+get-orig-source: libbcc.tar.gz slang.tar.gz rs.tar.gz
 	mkdir -p android-platform-frameworks-compile-$(UPSTREAM_VERSION)/libbcc
 	mkdir android-platform-frameworks-compile-$(UPSTREAM_VERSION)/slang
-	mkdir android-platform-frameworks-compile-$(UPSTREAM_VERSION)/linkloader
+	mkdir android-platform-frameworks-compile-$(UPSTREAM_VERSION)/rs
 	tar -f libbcc.tar.gz -z -x --directory android-platform-frameworks-compile-$(UPSTREAM_VERSION)/libbcc
 	tar -f slang.tar.gz -z -x --directory android-platform-frameworks-compile-$(UPSTREAM_VERSION)/slang
-	tar -f linkloader.tar.gz -z -x --directory android-platform-frameworks-compile-$(UPSTREAM_VERSION)/linkloader
+	tar -f rs.tar.gz -z -x --directory android-platform-frameworks-compile-$(UPSTREAM_VERSION)/rs
+	cp -r android-platform-frameworks-compile-$(UPSTREAM_VERSION)/rs/cpu_ref/linkloader android-platform-frameworks-compile-$(UPSTREAM_VERSION)
+	rm -r android-platform-frameworks-compile-$(UPSTREAM_VERSION)/rs
 	tar --create --xz -f android-platform-frameworks-compile_$(UPSTREAM_VERSION).orig.tar.xz android-platform-frameworks-compile-$(UPSTREAM_VERSION)
 	mv android-platform-frameworks-compile_$(UPSTREAM_VERSION).orig.tar.xz ..
-	rm -r -f $^ android-platform-frameworks-compile-$(UPSTREAM_VERSION)
+	rm -r $^ android-platform-frameworks-compile-$(UPSTREAM_VERSION)
 
 libbcc.tar.gz:
 	wget https://android.googlesource.com/platform/frameworks/compile/libbcc/+archive/$(UPSTREAM_TAG).tar.gz -O $@
@@ -61,5 +63,5 @@ libbcc.tar.gz:
 slang.tar.gz:
 	wget https://android.googlesource.com/platform/frameworks/compile/slang/+archive/$(UPSTREAM_TAG).tar.gz -O $@
 
-linkloader.tar.gz:
-	wget https://android.googlesource.com/platform/frameworks/compile/linkloader/+archive/android-4.2.2_r1.tar.gz -O $@
+rs.tar.gz:
+	wget https://android.googlesource.com/platform/frameworks/rs/+archive/$(UPSTREAM_TAG).tar.gz -O $@
