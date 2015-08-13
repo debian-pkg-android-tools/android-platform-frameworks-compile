@@ -23,6 +23,7 @@ override_dh_auto_build:
 	make -C libbcc/lib/ExecutionEngine -f ../../../debian/libbccExecutionEngine.mk
 	make -C libbcc/lib/Renderscript -f ../../../debian/libbccRenderscript.mk
 	make -C libbcc/lib/Support -f ../../../debian/libbccSupport.mk
+	make -C linkloader -f ../debian/librsloader.mk
 	make -C libbcc -f ../debian/libbcc.mk
 	make -C libbcc/tools/bcc -f ../../../debian/bcc.mk
 	make -C libbcc/tools/bcc_compat -f ../../../debian/bcc_compat.mk
@@ -38,6 +39,7 @@ override_dh_auto_clean:
 	make -C libbcc/lib/ExecutionEngine -f ../../../debian/libbccExecutionEngine.mk clean
 	make -C libbcc/lib/Renderscript -f ../../../debian/libbccRenderscript.mk clean
 	make -C libbcc/lib/Support -f ../../../debian/libbccSupport.mk clean
+	make -C linkloader -f ../debian/librsloader.mk clean
 	make -C libbcc -f ../debian/libbcc.mk clean
 	make -C libbcc/tools/bcc -f ../../../debian/bcc.mk clean
 	make -C libbcc/tools/bcc_compat -f ../../../debian/bcc_compat.mk clean

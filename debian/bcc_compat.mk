@@ -6,7 +6,8 @@ NAME = bcc_compat
 SOURCES = Main.cpp
 CXXFLAGS += $(RS_VERSION_DEFINE)
 CPPFLAGS += $(ANDROID_INCLUDES) -I/usr/include/android -I../../include
-LDFLAGS += -fPIC -ldl -lbcc -lbcinfo
+LDFLAGS += -fPIC -ldl -lgcc_s -L../.. -lbcc -L../../bcinfo -lbcinfo \
+           -L../../../linkloader -lrsloader
 
 build: $(SOURCES)
 	c++ $^ -o $(NAME) $(CXXFLAGS) $(CPPFLAGS) $(LDFLAGS)

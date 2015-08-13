@@ -1,7 +1,11 @@
 #!/usr/bin/dh-exec
 
-libbcc/include/*    usr/include
-libbcc/bcinfo/*.so  usr/lib/${DEB_HOST_MULTIARCH}
-libbcc/bcinfo/*.a   usr/lib/${DEB_HOST_MULTIARCH}
-libbcc/bcinfo/*/*.a usr/lib/${DEB_HOST_MULTIARCH}
-libbcc/lib/*/*.a    usr/lib/${DEB_HOST_MULTIARCH}
+libbcc/bcinfo/*.a    usr/lib/${DEB_HOST_MULTIARCH}
+libbcc/bcinfo/*.so   usr/lib/${DEB_HOST_MULTIARCH}
+libbcc/bcinfo/*/*.a  usr/lib/${DEB_HOST_MULTIARCH}
+libbcc/include/*     usr/include/android
+libbcc/lib/*/*.a     usr/lib/${DEB_HOST_MULTIARCH}
+linkloader/*.a       usr/lib/${DEB_HOST_MULTIARCH}
+linkloader/*.so      usr/lib/${DEB_HOST_MULTIARCH}
+linkloader/include/* usr/include/android/rsloader
+linkloader/utils/*.h usr/include/android/rsloader/utils

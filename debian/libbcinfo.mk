@@ -6,13 +6,18 @@ NAME = libbcinfo
 SOURCES = BitcodeTranslator.cpp \
           BitcodeWrapper.cpp \
           MetadataExtractor.cpp
-OBJECTS = $(SOURCES:.cpp=.o)
+OBJECTS = $(SOURCES:.cpp=.o) \
+          Wrap/libLLVMWrap.a \
+          BitReader_2_7/libLLVMBitReader_2_7.a \
+          BitReader_3_0/libLLVMBitReader_3_0.a \
+          ../../slang/BitWriter_3_2/libLLVMBitWriter_3_2.a \
+          /usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVMCore.a
 CXXFLAGS += -fPIC -c $(RS_VERSION_DEFINE)
 CPPFLAGS += $(ANDROID_INCLUDES) -I/usr/include/android -I../include -I../../slang
 LDFLAGS += -fPIC -shared -Wl,-rpath=/usr/lib/android -Wl,-soname,$(NAME).so.5 \
-           -L/usr/lib/android -lcutils -llog -ldl -lpthread
+           -ldl -lpthread -L/usr/lib/android -lcutils -llog
 
-build: $(OBJECTS) Wrap/libLLVMWrap.a BitReader_2_7/libLLVMBitReader_2_7.a BitReader_3_0/libLLVMBitReader_3_0.a ../../slang/BitWriter_3_2/libLLVMBitWriter_3_2.a
+build: $(OBJECTS)
 	c++ $^ -o $(NAME).so.$(UPSTREAM_LIBVERSION) $(LDFLAGS)
 	ar rs $(NAME).a $(OBJECTS)
 	ln -s -f $(NAME).so.$(UPSTREAM_LIBVERSION) $(NAME).so

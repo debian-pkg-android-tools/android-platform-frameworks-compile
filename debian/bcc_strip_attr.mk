@@ -6,7 +6,8 @@ NAME = bcc_strip_attr
 SOURCES = bcc_strip_attr.cpp
 CXXFLAGS += $(RS_VERSION_DEFINE)
 CPPFLAGS += $(ANDROID_INCLUDES) -I/usr/include/android -I../../include
-LDFLAGS += -fPIC -ldl -lm -lpthread -lbcc -lbcinfo
+LDFLAGS += -fPIC -ldl -lm -lpthread -L../.. -lbcc -L../../bcinfo -lbcinfo \
+           -L../../../linkloader -lrsloader
 
 build: $(SOURCES)
 	c++ $^ -o $(NAME) $(CXXFLAGS) $(CPPFLAGS) $(LDFLAGS)
