@@ -16,7 +16,8 @@ SOURCES = lib/ELFHeader.cpp \
 OBJECTS = $(SOURCES:.cpp=.o)
 CXXFLAGS += -fPIC -c -D__HOST__
 CPPFLAGS += $(ANDROID_INCLUDES) -I/usr/include/android -Iinclude -I.
-LDFLAGS += -fPIC -shared -Wl,-rpath=/usr/lib/android -Wl,-soname,$(NAME).so.5
+LDFLAGS += -fPIC -shared -Wl,-rpath=/usr/lib/android -Wl,-soname,$(NAME).so.5 \
+           -L/usr/lib/android -llog
 
 build: $(OBJECTS)
 	c++ $^ -o $(NAME).so.$(UPSTREAM_LIBVERSION) $(LDFLAGS)
