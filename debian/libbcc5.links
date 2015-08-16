@@ -1,0 +1,4 @@
+#!/usr/bin/dh-exec
+
+usr/lib/${DEB_HOST_MULTIARCH}/libbcc.so.${UPSTREAM_LIBVERSION}    usr/share/android-sdk/build-tools/${BUILD_TOOLS_VERSION}
+usr/lib/${DEB_HOST_MULTIARCH}/libbcinfo.so.${UPSTREAM_LIBVERSION} usr/share/android-sdk/build-tools/${BUILD_TOOLS_VERSION}

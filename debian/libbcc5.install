@@ -1,6 +1,7 @@
 #!/usr/bin/dh-exec
 
 libbcc/bcinfo/*.so.* usr/lib/${DEB_HOST_MULTIARCH}
-libbcc/bcinfo/*.so   usr/share/android-sdk/build-tools/${BUILD_TOOLS_VERSION}
 libbcc/*.so.*        usr/lib/${DEB_HOST_MULTIARCH}
-libbcc/*.so          usr/share/android-sdk/build-tools/${BUILD_TOOLS_VERSION}
+
+# Should be installed by android-platform-frameowrks-rs
+linkloader/*.so.*    usr/lib/${DEB_HOST_MULTIARCH}
