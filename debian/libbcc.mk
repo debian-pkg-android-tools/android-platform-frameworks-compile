@@ -6,7 +6,7 @@ OBJECTS = $(shell find lib -name *.o) \
           /usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVMLinker.a \
           /usr/lib/llvm-$(LLVM_VERSION)/lib/libLLVMSupport.a
 LDFLAGS += -fPIC -shared -Wl,-rpath=/usr/lib/android -Wl,-soname,$(NAME).so.5 \
-           -ldl -lpthread \
+           -ldl -lpthread -lncurses \
            -L/usr/lib/android -lutils -lcutils -llog \
            -Lbcinfo -lbcinfo -L../linkloader -lrsloader
 build: $(OBJECTS)
