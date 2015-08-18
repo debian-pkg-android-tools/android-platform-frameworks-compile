@@ -1,3 +1,5 @@
+Author: Kai-Chung Yan <seamlikok@gmail.com>
+Last-Update: 2015-08-18
 --- a/libbcc/lib/Renderscript/RSCompilerDriver.cpp
 +++ b/libbcc/lib/Renderscript/RSCompilerDriver.cpp
 @@ -171,7 +171,7 @@
