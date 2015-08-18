@@ -1,10 +1,5 @@
-# Use libc++
-CXXFLAGS += -D_USING_LIBCXX -nostdinc++ -std=c++11
-CPPFLAGS += -I/usr/include/c++/v1
-LDFLAGS += -nodefaultlibs -lm -lc -lc++
-
-# Use llvm
-CXXFLAGS += -D_GNU_SOURCE \
+CXXFLAGS += -std=c++11 \
+            -D_GNU_SOURCE \
             -D__STDC_LIMIT_MACROS \
             -D__STDC_CONSTANT_MACROS \
             -fomit-frame-pointer \
