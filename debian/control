@@ -8,7 +8,7 @@ Build-Depends: android-libcutils-dev,
                android-libutils-dev,
                debhelper (>=9),
                dh-exec,
-               libc++-dev (>= 3.6.2),
+               libncurses5-dev,
                llvm-3.5-dev
 Standards-Version: 3.9.6
 Homepage: https://android.googlesource.com
@@ -21,6 +21,7 @@ Architecture: amd64 i386 arm arm64 armeb mips mipsel mips64 mips64el
 Depends: android-libcutils,
          android-liblog,
          android-libutils,
+         libncurses5,
          ${shlibs:Depends},
          ${misc:Depends}
 Breaks: bcc
@@ -41,13 +42,7 @@ Architecture: amd64 i386 arm arm64 armeb mips mipsel mips64 mips64el
 Depends: libbcc5 (= ${binary:Version}), ${misc:Depends}
 Description: Versatile Bitcode Execution Engine for Mobile Devices - Devel files
  libbcc is an LLVM bitcode execution engine that compiles the bitcode to an
- in-memory executable. libbcc provides:
- * A just-in-time bitcode compiler, which translates the LLVM bitcode into
-   machine code.
- * A caching mechanism, which can:
-   - After each compilation, serialize the in-memory executable into a cache
-     file. Note that the compilation is triggered by a cache miss.
-   - Load from the cache file upon cache-hit.
+ in-memory executable.
  .
  This package contains the development files.
 
@@ -56,15 +51,6 @@ Architecture: amd64 i386 arm arm64 armeb mips mipsel mips64 mips64el
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Versatile Bitcode Execution Engine for Mobile Devices - Tools
  libbcc is an LLVM bitcode execution engine that compiles the bitcode to an
- in-memory executable. libbcc provides:
- * A just-in-time bitcode compiler, which translates the LLVM bitcode into
-   machine code.
- * A caching mechanism, which can:
-   - After each compilation, serialize the in-memory executable into a cache
-     file. Note that the compilation is triggered by a cache miss.
-   - Load from the cache file upon cache-hit.
+ in-memory executable.
  .
- This package contains the following tools:
- * bcc
- * bcc_compat
- * bcc_strip_attr
+ This package contains the following tools: bcc, bcc_compat and bcc_strip_attr.
