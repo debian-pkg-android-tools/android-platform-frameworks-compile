@@ -1,7 +1,5 @@
 #!/usr/bin/dh-exec
 
-libbcc/bcinfo/*.so.* usr/lib/${DEB_HOST_MULTIARCH}
 libbcc/*.so.*        usr/lib/${DEB_HOST_MULTIARCH}
-
-# Should be installed by android-platform-frameowrks-rs
+libbcc/bcinfo/*.so.* usr/lib/${DEB_HOST_MULTIARCH}
 linkloader/*.so.*    usr/lib/${DEB_HOST_MULTIARCH}
